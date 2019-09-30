@@ -1,6 +1,6 @@
 # Calculator
 
-##FAC Precourse Project 
+## FAC Precourse Project 
 
 View my vanilla javascript calculator [here](https://nikkesan.github.io/calculator/).
 
