@@ -1,7 +1,7 @@
-# Calculator
+# Adventure Time BMO (Beemo) Themed Calculator
 
-## FAC Precourse Project 
+## FAC Pre-course Project 
 
 View my vanilla javascript calculator [here](https://nikkesan.github.io/calculator/).
 
-Built directly with Atom text editor, Git Bash terminal and Chrome browser.  No frameworks used.
+Built using VS Code text editor, iTerm2 terminal and Chrome browser.  No frameworks used.
