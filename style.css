@@ -4,10 +4,18 @@
 }
 
 body {
-    padding: 0;
-    margin: 0;
     background: url(./images/background.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
     justify-content: center;
+}
+
+img {
+    height: 20vh;
+    padding: 20px;
 }
 
 .calculator {
