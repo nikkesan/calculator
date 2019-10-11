@@ -1,6 +1,6 @@
-# Adventure Time BMO (Beemo) Themed Calculator
+## Adventure Time BMO (Beemo) Themed Calculator
 
-## FAC Pre-course Project 
+### FAC Pre-course Project 
 
 View my vanilla javascript calculator [here](https://nikkesan.github.io/calculator/).
 
