@@ -65,7 +65,7 @@ body {
 }
 
 .calculator>button:hover {
-    background-color: pink;
+    background-color: pink !important;
     box-shadow: 0 0 rgb(122, 122, 131);
 }
 
@@ -81,18 +81,17 @@ body {
 .square-button {
     grid-column: span 2;
     grid-row: span 2;
-    background-color: rgb(242, 5, 83);
 }
 
 .display-screen .previous {
     font-size: 1.5rem;
 }
 
-.display-screen .current {
+.display-screen .current-display {
     font-size: 4rem;
 }
 
-.on-off {
+.on-off-switch {
     background-color: rgb(74, 207, 81);
 }
 
@@ -106,6 +105,10 @@ body {
 
 .operator {
     background-color: rgb(31, 68, 116);
+}
+
+.square-button {
+    background-color: rgb(242, 5, 83) !important;
 }
 
 .decimal {
