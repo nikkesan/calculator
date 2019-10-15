@@ -1,9 +1,10 @@
 // Object to hold data needed to calculate output - uses immediate execution logic
 const calculator = {
   displayValue: '0',
-  firstVar: null,
+  varA: null,
   operator: null,
-  secondVar: null
+  varB: null,
+  readyForVarB: false
 };
 
 // Function to update display value of calculator
@@ -13,7 +14,14 @@ function updateDisplay() {
 }
 updateDisplay();
 
-/* Main key press handler for listening for button presses
+function resetCalculator() {
+  calculator.displayValue = '0';
+  calculator.varA = null;
+  calculator.operator = null;
+  calculator.readyForVarB = false;
+  console.log(calculator);
+}
+/* Main key press handler for listening to button presses
    Button click states are either:
    1. Digits (0-9)
    2. Operators (+, -, *, /, =)
@@ -28,21 +36,91 @@ keys.addEventListener('click', (event) => {
   if (!target.matches('button')) {
     return;
   }
+
   if (target.classList.contains('operator')) {
-    console.log('operator', target.value);
+    handleOperator(target.value);
+    updateDisplay();
     return;
   }
   if (target.classList.contains('decimal')) {
-    console.log('decimal', target.value);
+    inputDecimal(target.value);
+    updateDisplay();
     return;
   }
   if (target.classList.contains('all-clear')) {
-    console.log('clear', target.value);
+    resetCalculator();
+    updateDisplay();
     return;
   }
   if (target.classList.contains('on-off')) {
     console.log('on-off', target.value);
     return;
   }
-  console.log('digit', target.value);
+  inputDigit(target.value);
+  updateDisplay();
 });
+
+/* Overwrite initial display '0' with number input if a number is pressed.  
+   Append digits if additional numbers are pressed */
+function inputDigit(digit) {
+  const displayValue = calculator.displayValue;
+  const readyForVarB = calculator.readyForVarB;
+
+  if (readyForVarB === true) {
+    calculator.displayValue = digit;
+    calculator.readyForVarB = false;
+  } else {
+    calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
+  }
+  console.log(calculator);
+}
+
+/* Add a decimal point to the display value if there isn't already a decimal point present. 
+   Only ONE decimal point allowed */
+function inputDecimal(decimal) {
+  if (calculator.waitingForSecondOperand === true) {
+    return;
+  }
+  if (!calculator.displayValue.includes(decimal)) {
+    calculator.displayValue += decimal;
+  }
+}
+console.log(calculator);
+
+function handleOperator(nextOperator) {
+  const varA = calculator.varA;
+  const displayValue = calculator.displayValue;
+  const operator = calculator.operator;
+  const inputValue = parseFloat(displayValue); // Convert input into a number with decimals
+
+
+  if (operator && calculator.readyForVarB) {
+    calculator.operator = nextOperator;
+    console.log(calculator);
+    return;
+  }
+  // Store converted number into varA if no value exists yet
+  if (varA === null) {
+    calculator.varA = inputValue;
+  } else if (operator) {
+    const currentValue = varA || 0;
+    const result = performCalculation[operator](currentValue, inputValue);
+
+    calculator.displayValue = String(result);
+    calculator.varA = result;
+  }
+
+  calculator.readyForVarB = true;
+  calculator.operator = nextOperator;
+
+  console.log(calculator);
+}
+
+const performCalculation = {
+  '+': (varA, readyForVarB) => varA + readyForVarB,
+  '-': (varA, readyForVarB) => varA - readyForVarB,
+  '*': (varA, readyForVarB) => varA * readyForVarB,
+  '/': (varA, readyForVarB) => varA / readyForVarB,
+  '=': (varA, readyForVarB) => readyForVarB,
+};
+
