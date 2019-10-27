@@ -14,20 +14,20 @@ function updateDisplay() {
 }
 updateDisplay();
 
+// Clear all calculator settings 
 function resetCalculator() {
   calculator.displayValue = '0';
   calculator.varA = null;
   calculator.operator = null;
   calculator.readyForVarB = false;
-  console.log(calculator);
 }
+
 /* Main key press handler for listening to button presses
    Button click states are either:
    1. Digits (0-9)
-   2. Operators (+, -, *, /, =)
+   2. Operators (+ - * / =)
    3. Decimal point (.)
    4. Reset (AC)
-   5. On-Off switch (ON/OFF)  
 */
 const keys = document.querySelector('.calculator');
 keys.addEventListener('click', (event) => {
@@ -52,10 +52,6 @@ keys.addEventListener('click', (event) => {
     updateDisplay();
     return;
   }
-  if (target.classList.contains('on-off')) {
-    console.log('on-off', target.value);
-    return;
-  }
   inputDigit(target.value);
   updateDisplay();
 });
@@ -72,7 +68,6 @@ function inputDigit(digit) {
   } else {
     calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
   }
-  console.log(calculator);
 }
 
 /* Add a decimal point to the display value if there isn't already a decimal point present. 
@@ -85,7 +80,6 @@ function inputDecimal(decimal) {
     calculator.displayValue += decimal;
   }
 }
-console.log(calculator);
 
 function handleOperator(nextOperator) {
   const varA = calculator.varA;
@@ -96,7 +90,6 @@ function handleOperator(nextOperator) {
 
   if (operator && calculator.readyForVarB) {
     calculator.operator = nextOperator;
-    console.log(calculator);
     return;
   }
   // Store converted number into varA if no value exists yet
@@ -112,8 +105,6 @@ function handleOperator(nextOperator) {
 
   calculator.readyForVarB = true;
   calculator.operator = nextOperator;
-
-  console.log(calculator);
 }
 
 const performCalculation = {
@@ -123,4 +114,3 @@ const performCalculation = {
   '/': (varA, readyForVarB) => varA / readyForVarB,
   '=': (varA, readyForVarB) => readyForVarB,
 };
-

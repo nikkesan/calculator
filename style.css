@@ -44,6 +44,8 @@ body {
     padding: 8px;
     border-radius: 15px;
     box-shadow: inset 2px 2px rgb(109, 108, 108);
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 .calculator>.display-screen>input {
@@ -73,15 +75,22 @@ body {
     border: 2px solid rgb(84, 84, 99);
 }
 
-.span-horizontally {
-    grid-column: span 2;
-    background-color: rgb(72, 124, 129);
+/* Grid layout for Calculator buttons*/
+
+.span-row {
+    grid-column: span 5;
 }
 
-.square-button {
+.span-two {
+    grid-column: span 2;
+}
+
+.span-square {
     grid-column: span 2;
     grid-row: span 2;
 }
+
+/* Display screen */
 
 .display-screen .previous {
     font-size: 1.5rem;
@@ -91,12 +100,14 @@ body {
     font-size: 4rem;
 }
 
-.on-off-switch {
-    background-color: rgb(74, 207, 81);
+/* Buttons in style of BMO */
+
+.delete {
+    background-color: rgb(72, 124, 129);
 }
 
-#on-off {
-    font-size: 1.3rem;
+.all-clear {
+    background-color: rgb(74, 207, 81);
 }
 
 .number {
@@ -107,10 +118,10 @@ body {
     background-color: rgb(31, 68, 116);
 }
 
-.square-button {
-    background-color: rgb(242, 5, 83) !important;
-}
-
 .decimal {
     background-color: rgb(238, 211, 57);
+}
+
+.equals {
+    background-color: rgb(242, 5, 83) !important;
 }
